@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ianzyon.cursomc.domain.Categoria;
 import com.ianzyon.cursomc.services.CategoriaService;
+import com.ianzyon.cursomc.services.exceptions.ObjectNotFoundException;
 
+
+
+// Classe usada para passar um request http contendo os paths da REST
 @RestController 
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -19,7 +23,7 @@ public class CategoriaResource {
 	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		Categoria obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
